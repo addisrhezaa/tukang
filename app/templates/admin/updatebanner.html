@@ -1,0 +1,146 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/css/bootstrap.min.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha3/dist/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <style>
+    .input-group-append {
+      cursor: pointer;
+    }
+  </style>
+  <title>Document</title>
+  <!-- TinyMCE CDN -->
+  <script src="https://cdn.tiny.cloud/1/02if4grt6rgnzmqkb3szzqif9viyasr89x7asnbz1qmcfqi9/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script> 
+  <script>
+    tinymce.init({
+    selector: 'textarea#editor',
+    skin: 'bootstrap', //The TinyMCE Bootstrap skin
+    plugins: 'lists, link, image, media',                    
+    });
+  </script>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+      <div>
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" href="/dashboard">Dashboard</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Order Form
+            </a>
+            <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+              <li><a class="nav-link" href="/viewprofesional">Professional</a></li>
+              <li><a class="nav-link" href="/viewworker">Worker</a></li>
+              <li><a class="nav-link" href="/viewitem">Items</a></li>
+            </ul>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Banner
+            </a>
+            <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+              <li><a class="nav-link" href="/viewbanner">View Banner</a></li>
+              <li><a class="nav-link" href="/createbanner">Add Banner</a></li>
+            </ul>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Blog
+            </a>
+            <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+              <li><a class="nav-link" href="/viewblog">View Blog</a></li>
+              <li><a class="nav-link" href="/createblog">Add Blog</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+      <div>
+        <ul class="navbar-nav">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Logged in as {{user.username}}
+            </a>
+            <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+              <li><a class="nav-link" href="/">Homepage</a></li>
+              <li><a class="nav-link" href="/logout">Logout</a></li>
+            </ul>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <form method="post" enctype='multipart/form-data'>
+    {% csrf_token %}
+    <div class="container mt-4 mb-4">
+      <div class="row justify-content-md-center">
+          <div class="col-md-12 col-lg-8">
+            <div class="form-group">
+              <label for="name" class="col-1 col-form-label">Judul</label>
+              <input type="text" class="form-control" id="name" name="title" value="{{ banner.title }}">
+            </div>
+            <br>
+            <div class="form-group">
+              <img src="{% static banner.img.url %}" alt="" style="width: 300px;"><br>
+              <label for="formFile" class="form-label">Thumbnail</label>
+              <input class="form-control" type="file" id="formFile" name="img">
+            </div>
+            <br>
+            <div class="form-group">
+              <label for="date" class="col-1 col-form-label">Deskripsi</label>
+              <input type="text" class="form-control" id="description" name="description" value="{{ banner.description }}"></textarea>
+            </div>
+            <br>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </div>
+      </div>
+    </div>
+  </form>
+  <script>
+    tinymce.init({
+            selector:'#editor',
+            menubar: false,
+            statusbar: false,
+            plugins: 'autoresize anchor autolink charmap code codesample directionality fullpage help hr image imagetools insertdatetime link lists media nonbreaking pagebreak preview print searchreplace table template textpattern toc visualblocks visualchars',
+            toolbar: 'h1 h2 bold italic strikethrough blockquote bullist numlist backcolor | link image media | removeformat help fullscreen ',
+            skin: 'bootstrap',
+            toolbar_drawer: 'floating',
+            min_height: 200,           
+            autoresize_bottom_margin: 16,
+            setup: (editor) => {
+                editor.on('init', () => {
+                    editor.getContainer().style.transition="border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out"
+                });
+                editor.on('focus', () => {
+                    editor.getContainer().style.boxShadow="0 0 0 .2rem rgba(0, 123, 255, .25)",
+                    editor.getContainer().style.borderColor="#80bdff"
+                });
+                editor.on('blur', () => {
+                    editor.getContainer().style.boxShadow="",
+                    editor.getContainer().style.borderColor=""
+                });
+            }
+        });
+  </script>
+</body>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.6.0/umd/popper.min.js" ></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+<script>
+	$(function(){
+		$('#datepicker').datepicker();
+	});
+</script>
+</html>

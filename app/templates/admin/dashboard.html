@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <title>Login</title>
+    <style>
+      .col{
+        margin: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    {% if user.is_superuser %}
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container-fluid">
+        <div>
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" href="/dashboard">Dashboard</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Order Form
+              </a>
+              <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+                <li><a class="nav-link" href="/viewprofesional">Professional</a></li>
+                <li><a class="nav-link" href="/viewworker">Worker</a></li>
+                <li><a class="nav-link" href="/viewitem">Items</a></li>
+              </ul>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Banner
+              </a>
+              <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+                <li><a class="nav-link" href="/viewbanner">View Banner</a></li>
+                <li><a class="nav-link" href="/createbanner">Add Banner</a></li>
+              </ul>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Blog
+              </a>
+              <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+                <li><a class="nav-link" href="/viewblog">View Blog</a></li>
+                <li><a class="nav-link" href="/createblog">Add Blog</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+        <div>
+          <ul class="navbar-nav">
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Logged in as {{user.username}}
+              </a>
+              <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+                <li><a class="nav-link" href="/">Homepage</a></li>
+                <li><a class="nav-link" href="/logout">Logout</a></li>
+              </ul>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    {% else %}
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container-fluid">
+        <div>
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" href="/dashboard">Dashboard</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Banner
+              </a>
+              <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+                <li><a class="nav-link" href="/viewbanner">View Banner</a></li>
+                <li><a class="nav-link" href="/createbanner">Add Banner</a></li>
+              </ul>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Blog
+              </a>
+              <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+                <li><a class="nav-link" href="/viewblog">View Blog</a></li>
+                <li><a class="nav-link" href="/createblog">Add Blog</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+        <div>
+          <ul class="navbar-nav">
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Logged in as {{user.username}}
+              </a>
+              <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+                <li><a class="nav-link" href="/">Homepage</a></li>
+                <li><a class="nav-link" href="/logout">Logout</a></li>
+              </ul>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    {% endif %}
+
+    {% if user.is_superuser %}
+    <div class="container">
+      <div class="row">
+        <div class="col card">
+          <div class="card-body">
+            <h5 class="card-title">Order Professional</h5>
+            <h5>{{ profesional }}</h5>
+          </div>
+        </div>
+        <div class="col card">
+          <div class="card-body">
+            <h5 class="card-title">Order Worker</h5>
+            <h5>{{ worker }}</h5>
+          </div>
+        </div>
+        <div class="col card">
+          <div class="card-body">
+            <h5 class="card-title">Order Items</h5>
+            <h5>{{ item }}</h5>
+          </div>
+        </div>
+        <div class="col card">
+          <div class="card-body">
+            <h5 class="card-title">Jumlah Artikel</h5>
+            <h5>{{ artikel }}</h5>
+          </div>
+        </div>
+        <br>
+        <div class="table-responsive">
+          <h3>Data Customer</h3>
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Username</th>
+                <th scope="col">Nama</th>
+                <th scope="col">Email</th>
+                <th scope="col">Tanggal Bergabung</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for item in datacust %}
+              <tr>
+                <th scope="row">{{ item.id }}</th>
+                <td>{{ item.username }}</td>
+                <td>{{ item.first_name }}</td>
+                <td>{{ item.email }}</td>
+                <td>{{ item.date_joined }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    {% else %}
+    <div class="container">
+      <div class="row">
+        <div class="col card">
+          <div class="card-body">
+            <h5 class="card-title">Jumlah Banner</h5>
+            <h5>{{ banner }}</h5>
+          </div>
+        </div>
+        <div class="col card">
+          <div class="card-body">
+            <h5 class="card-title">Jumlah Artikel</h5>
+            <h5>{{ artikel }}</h5>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endif %}
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+  </body>
+</html>

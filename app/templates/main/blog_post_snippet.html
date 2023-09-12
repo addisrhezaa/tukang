@@ -1,0 +1,41 @@
+{% load static %}
+{% if blog_post %}
+    <article class="entry">
+
+    <div class="entry-img">
+        <img src="{% static blog_post.img.url %}" alt="" class="img-fluid"/>
+    </div>
+
+    <h2 class="entry-title">
+        <a href="blog-single.html">{{ blog_post.title }}</a>
+    </h2>
+
+    <div class="entry-meta">
+        <ul>
+        <li class="d-flex align-items-center"><i class="bi bi-person"></i> <a href="blog-single.html">{{ blog_post.author.first_name }}</a></li>
+        <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <a href="blog-single.html"><time datetime="2020-01-01">{{ blog_post.date }}</time></a></li>
+        </ul>
+    </div>
+
+    <div class="entry-content">
+        {{ blog_post.description| stringformat:".200s" | safe }}...
+        <div class="read-more">
+        <a href="{% url 'blogsingle' blog_post.idartikel %}">Read More</a>
+        </div>
+    </div>
+
+    </article><!-- End blog entry -->
+{% else %}
+
+<div class="container">
+	<div class="row">
+		<div class="card m-auto">
+			<div class="card-body mt-2 mb-2">
+				<h2 class="card-title">No results</h2>
+				<p class="card-text">There were no results matching the search: "{{query}}"</p>
+			</div>
+		</div>
+	</div>
+</div>
+
+{% endif %}

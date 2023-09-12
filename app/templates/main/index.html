@@ -1,0 +1,278 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Sailor Bootstrap Template - Index</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="{% static 'assets/img/favicon.png' %}" rel="icon">
+  <link href="{% static 'assets/img/apple-touch-icon.png' %}" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="{% static 'assets/vendor/animate.css/animate.min.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/boxicons/css/boxicons.min.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/glightbox/css/glightbox.min.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/remixicon/remixicon.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/swiper/swiper-bundle.min.css' %}" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="{% static 'assets/css/style.css' %}" rel="stylesheet">
+
+  <!-- =======================================================
+  * Template Name: Sailor
+  * Updated: May 30 2023 with Bootstrap v5.3.0
+  * Template URL: https://bootstrapmade.com/sailor-free-bootstrap-theme/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+</head>
+
+<body>
+
+  <!-- ======= Header ======= -->
+  <header id="header" class="fixed-top d-flex align-items-center">
+    <div class="container d-flex align-items-center">
+
+      <a href="/" class="logo me-auto"><img src="{% static 'assets/img/logohomeit.png' %}" alt="" class="img-fluid"></a>
+
+      <nav id="navbar" class="navbar">
+        <ul>
+          <li><a href="/" class="active">Beranda</a></li>
+          <li><a href="/blog">Artikel</a></li>
+          {% if user.is_authenticated %}
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Logged in as {{user.username}}
+            </a>
+            {% if user.is_staff %}
+            <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+              <li><a class="nav-link" href="/dashboard">Dashboard</a></li>
+              <li><a class="nav-link" href="/logout">Logout</a></li>
+            </ul>
+            {% else %}
+            <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+              <li><a class="nav-link" href="/logout">Logout</a></li>
+            </ul>
+            {% endif %}
+          </li>
+          {% else %}
+          <li class="nav-item">
+            <a class="getstarted" href="/login">Login</a>
+          </li>
+          {% endif %}
+        </ul>
+        <i class="bi bi-list mobile-nav-toggle"></i>
+      </nav><!-- .navbar -->
+
+    </div>
+  </header><!-- End Header -->
+
+  <!-- ======= Hero Section ======= -->
+  <section id="hero">
+    <div id="heroCarousel" data-bs-interval="5000" class="carousel slide carousel-fade" data-bs-ride="carousel">
+
+      <ol class="carousel-indicators" id="hero-carousel-indicators"></ol>
+
+      <div class="carousel-inner" role="listbox">
+        {% for item in banner %}
+        <!-- Slide 1 -->
+        <div class="carousel-item active" style="background-image: url('{% static item.img.url %}')">
+          <div class="carousel-container">
+            <div class="container">
+              <h2 class="animate__animated animate__fadeInDown">{{ item.title }}</h2>
+              <p class="animate__animated animate__fadeInUp">{{ item.description }}</p>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+
+      <a class="carousel-control-prev" href="#heroCarousel" role="button" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon bi bi-chevron-left" aria-hidden="true"></span>
+      </a>
+
+      <a class="carousel-control-next" href="#heroCarousel" role="button" data-bs-slide="next">
+        <span class="carousel-control-next-icon bi bi-chevron-right" aria-hidden="true"></span>
+      </a>
+
+    </div>
+  </section><!-- End Hero -->
+
+  <main id="main">
+
+    <!-- ======= About Section ======= -->
+    <section id="about" class="about">
+      <div class="container">
+
+        <div class="row content">
+          <div class="col-lg-6">
+            <h2>make it home</h2>
+            <h3>Selamat datang di HomeIt, penuhi berbagai kebutuhan rumahmu sekarang juga bersama dengan berbagai pekerja profesional dan terpercaya.</h3>
+          </div>
+          <div class="col-lg-6 pt-4 pt-lg-0">
+            <p>
+              Tempat tinggal merupakan ruang istimewa bagi tiap orang yang berada didalamnya. HomeIt hadir sebagai wadah untuk memberikan kenyamanan dan keindahan dirumahmu melalui 3 layanan utama.
+            </p>
+            <ul>
+              <li><i style="color: #cba328;" class="ri-check-double-line"></i> Meet Professional</li>
+              <li><i style="color: #cba328;" class="ri-check-double-line"></i> Meet Worker</li>
+              <li><i style="color: #cba328;" class="ri-check-double-line"></i> Items</li>
+            </ul>
+            <p class="fst-italic">
+              Penuhi kebutuhan rumahmu sekarang juga.
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </section><!-- End About Section -->
+
+    <!-- ======= Pricing Section ======= -->
+    <section id="pricing" class="pricing">
+      <div class="container">
+
+        <div class="row">
+
+          <div class="col-lg-4 col-md-6">
+            <div class="box">
+              <h3>Meet Professional</h3>
+              <h4><i class="bi bi-briefcase-fill"></i></h4>
+              <h5>Temui arsitek dan kontraktor secara online sekarang!</h5>
+              <div class="btn-wrap">
+                <a href="/createprofesional" class="btn-buy">Hire Now</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 mt-4 mt-md-0">
+            <div class="box">
+              <h3>Meet Worker</h3>
+              <h4><i class="bi bi-wrench-adjustable"></i></h4>
+              <h5>Penuhi kebutuhan pekerja untuk rumahmu sekarang!</h5>
+              <div class="btn-wrap">
+                <a href="/createworker" class="btn-buy">Hire Now</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 mt-4 mt-md-0">
+            <div class="box">
+              <h3>Items</h3>
+              <h4><i class="bi bi-box-seam-fill"></i></h4>
+              <h5>Beli kebutuhan bangunan rumahmu sekarang!</h5>
+              <div class="btn-wrap">
+                <a href="/createitem" class="btn-buy">Buy Now</a>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section><!-- End Pricing Section -->
+
+    <!-- ======= Services Section ======= -->
+    <section id="services" class="services">
+      <div class="container">
+        <div class="row justify-content-md-center">
+          <div class="col col-lg-2">
+          </div>
+          <div class="col-lg-8">
+            <div style="border-radius: 30px; margin-left: 0px;" class="icon-box">
+              <i class="bi bi-whatsapp"></i>
+              <h4>Pesan melalui Whatsapp</h4>
+              <p>Jangan ragu untuk menghubungi kami melalui nomor kontak yang tertera. Kami siap membantu mewujudkan rumah impian Anda dengan perencanaan yang matang dan hasil yang memukau.</p>
+              <div style="margin-left: 70px;" class="pricing btn-wrap">
+                <a href="https://wa.link/949s3d" class="pricing btn-buy">Pesan Sekarang</a>
+              </div>
+            </div>
+          </div>
+          <div class="col col-lg-2">
+          </div>
+      </div>
+    </section><!-- End Services Section -->
+    
+  </main><!-- End #main -->
+
+  <!-- ======= Footer ======= -->
+  <footer id="footer">
+    <div class="footer-top">
+      <div class="container">
+        <div class="row">
+
+          <div class="col-lg-3 col-md-6">
+            <div class="footer-info">
+              <img style="width: 200px; margin-bottom: 40px;" src="{% static 'assets/img/logohomeit2.png' %}" alt="">
+              <p>
+                <strong>Phone:</strong> +62 878 4469 8585<br>
+                <strong>Email:</strong> homeit.id@gmail.com<br>
+                <strong>Instagram:</strong><a href="https://www.instagram.com/homeit_id/" style="color: azure;"> @homeit.id</a>
+              </p>
+            </div>
+          </div>
+
+          <div class="col-lg-2 col-md-6 footer-links">
+            <h4>Useful Links</h4>
+            <ul>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Beranda</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#about">Tentang Kami</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#pricing">Layanan</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="/blog">Artikel</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#services">Kontak Kami</a></li>
+            </ul>
+          </div>
+
+          <div class="col-lg-3 col-md-6 footer-links">
+            <h4>Our Services</h4>
+            <ul>
+              <li><i class="bx bx-chevron-right"></i> <a href="/createprofesional">Meet Professional</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="/createworker">Meet Worker</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="/createitem">Items</a></li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="copyright">
+        &copy; Copyright <strong><span>HomeIt</span></strong>. All Rights Reserved
+      </div>
+      <div class="credits">
+        <!-- All the links in the footer should remain intact. -->
+        <!-- You can delete the links only if you purchased the pro version. -->
+        <!-- Licensing information: https://bootstrapmade.com/license/ -->
+        <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/sailor-free-bootstrap-theme/ -->
+        Designed by <a href="https://bootstrapmade.com/">LOSIK TI-UB</a>
+      </div>
+    </div>
+  </footer><!-- End Footer -->
+
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script src="{% static 'assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/glightbox/js/glightbox.min.js'%}"></script>
+  <script src="{% static 'assets/vendor/isotope-layout/isotope.pkgd.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/swiper/swiper-bundle.min.js'%}"></script>
+  <script src="{% static 'assets/vendor/waypoints/noframework.waypoints.js' %}"></script>
+  <script src="{% static 'assets/vendor/php-email-form/validate.js' %}"></script>
+
+  <!-- Template Main JS File -->
+  <script src="{% static 'assets/js/main.js' %}"></script>
+
+</body>
+
+</html>
